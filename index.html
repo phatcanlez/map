@@ -1,63 +1,56 @@
 <!doctype html>
+
 <html lang="vi">
-<head>
-<meta charset="UTF-8" />
-<title>Leaflet – màu tùy chỉnh</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Leaflet - Google Maps Like</title>
 
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
 
-<style>
-html,body{
-  margin:0;
-  padding:0;
-}
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-#map{
-  width:100%;
-  height:100vh;
-  background:#FFFEE0; /* màu đất */
-}
+      #map {
+        width: 100%;
+        height: 100vh;
+      }
+    </style>
+  </head>
 
-/* chỉnh màu tile để đường gần #D5D7DA */
-.leaflet-tile{
-  filter:
-    sepia(0.15)
-    saturate(0.6)
-    brightness(1.1)
-    contrast(0.9);
-}
-</style>
-</head>
+  <body>
+    <div id="map"></div>
 
-<body>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<div id="map"></div>
+    <script>
+      const map = L.map("map", {
+        center: [10.77653, 106.700981],
+        zoom: 16,
+        zoomControl: false,
+      });
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      /* đường + map */
 
-<script>
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+        {
+          maxZoom: 19,
+          attribution: "© OpenStreetMap",
+        },
+      ).addTo(map);
 
-const center = [10.77653,106.700981];
+      /* chỉ label */
 
-const map = L.map("map",{
-  center:center,
-  zoom:16,
-  zoomControl:false
-});
-
-L.tileLayer(
-"https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-{
-  maxZoom:19,
-  attribution:
-  '&copy; OpenStreetMap &copy; CARTO'
-}
-).addTo(map);
-
-</script>
-
-</body>
+      L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels/{z}/{x}/{y}{r}.png",
+      ).addTo(map);
+    </script>
+  </body>
 </html>
